@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+  "name": "Save to Memos",
+  "version": "1.1",
+  "description": "Right-click to save highlighted text or media to your Memos instance.",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "notifications",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_title": "Save to Memos – Settings"
+  }
+}

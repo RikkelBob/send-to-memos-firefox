@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Save to Memos – Settings</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #181c26;
+      --border: #272d3d;
+      --accent: #f5c542;
+      --accent-dim: rgba(245,197,66,0.12);
+      --text: #e8eaf0;
+      --muted: #6b7385;
+      --success: #4ade80;
+      --error: #f87171;
+      --radius: 8px;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo svg {
+      width: 22px;
+      height: 22px;
+      fill: #0f1117;
+    }
+
+    .header-text h1 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .header-text p {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    input {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      padding: 10px 13px;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    input::placeholder {
+      color: var(--muted);
+      opacity: 0.5;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .hint a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .hint a:hover { text-decoration: underline; }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    button {
+      flex: 1;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+
+    button:active { transform: scale(0.98); }
+
+    #saveBtn {
+      background: var(--accent);
+      color: #0f1117;
+    }
+
+    #saveBtn:hover { opacity: 0.88; }
+
+    #testBtn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      flex: 0 0 auto;
+      padding: 11px 18px;
+    }
+
+    #testBtn:hover { border-color: var(--accent); color: var(--accent); }
+    #testBtn:disabled { opacity: 0.5; cursor: default; }
+
+    .status {
+      margin-top: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      min-height: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status.success { color: var(--success); }
+    .status.error { color: var(--error); }
+    .status.info { color: var(--muted); }
+
+    .how-to {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .how-to li {
+      margin-left: 18px;
+      margin-bottom: 4px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--accent-dim);
+      color: var(--accent);
+      border-radius: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      padding: 1px 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4h16v2H4V4zm0 4h16v2H4V8zm0 4h10v2H4v-2zm0 4h7v2H4v-2z"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1>Save to Memos</h1>
+        <p>Configure your connection settings below</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Connection</div>
+
+      <div class="field">
+        <label for="memosUrl">Memos URL</label>
+        <input type="url" id="memosUrl" placeholder="https://memos.yourserver.com" autocomplete="off" spellcheck="false" />
+        <div class="hint">Your self-hosted Memos instance URL, without a trailing slash.</div>
+      </div>
+
+      <div class="field">
+        <label for="memosToken">API Token</label>
+        <input type="text" id="memosToken" placeholder="your-access-token" autocomplete="off" spellcheck="false" />
+        <div class="hint">
+          In Memos, go to <strong>Settings → API Tokens</strong> and create a new token. Paste it here.
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn">Save Settings</button>
+        <button id="testBtn">Test Connection</button>
+      </div>
+
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">How to use</div>
+      <div class="how-to">
+        <ol>
+          <li>Highlight any text on a webpage</li>
+          <li>Right-click → <span class="pill">Save to Memos</span></li>
+          <li>Works on images, videos, audio, and links too</li>
+        </ol>
+        <br/>
+        Each saved note includes a <span class="pill">Source</span> link back to the original page.
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
